@@ -1,5 +1,7 @@
 import { useState } from "react";
-import { Bot, SendHorizonal, Terminal, User } from "lucide-react";
+import { Bot, Github, SendHorizonal, Terminal, User } from "lucide-react";
+
+const REPO_URL = "https://github.com/fly-apps/tanstack-sprite-agent";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Bubble, BubbleContent } from "@/components/ui/bubble";
 import { Button } from "@/components/ui/button";
@@ -146,12 +148,21 @@ export default function App() {
     <div className="mx-auto flex h-screen w-full max-w-3xl flex-col">
       <header className="flex items-center gap-3 border-b px-5 py-3">
         <img src="/logo.webp" alt="Sprites" className="size-8 rounded-lg" />
-        <div className="min-w-0">
+        <div className="min-w-0 flex-1">
           <div className="text-sm font-semibold">TanStack AI × Sprites</div>
           <div className="truncate text-xs text-muted-foreground">
             Claude with a real Linux sandbox — powered by @tanstack/ai-sandbox-sprites
           </div>
         </div>
+        <a
+          href={REPO_URL}
+          target="_blank"
+          rel="noreferrer"
+          aria-label="View source on GitHub"
+          className="inline-flex size-9 shrink-0 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+        >
+          <Github className="size-5" />
+        </a>
       </header>
 
       <MessageScrollerProvider autoScroll>
