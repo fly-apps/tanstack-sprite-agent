@@ -1,7 +1,5 @@
 import { useState } from "react";
 import { Bot, Github, SendHorizonal, Terminal, User } from "lucide-react";
-
-const REPO_URL = "https://github.com/fly-apps/tanstack-sprite-agent";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Bubble, BubbleContent } from "@/components/ui/bubble";
 import { Button } from "@/components/ui/button";
@@ -22,6 +20,8 @@ import {
 } from "@/components/ui/message-scroller";
 import { useSandboxChat } from "@/lib/use-sandbox-chat";
 import type { ChatMessage, ToolStep } from "@/lib/use-sandbox-chat";
+
+const REPO_URL = "https://github.com/fly-apps/tanstack-sprite-agent";
 
 const SUGGESTIONS = [
   "What OS, kernel, and node version is this sandbox?",
@@ -242,19 +242,21 @@ export default function App() {
           submit();
         }}
       >
-        <textarea
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          onKeyDown={(e) => {
-            if (e.key === "Enter" && !e.shiftKey) {
-              e.preventDefault();
-              submit();
-            }
-          }}
-          rows={1}
-          placeholder="Ask Claude to run something in the sandbox…"
-          className="max-h-40 min-h-10 flex-1 resize-none rounded-lg border bg-background px-3 py-2 text-sm outline-none focus-visible:ring-2 focus-visible:ring-ring/40"
-        />
+        <div className={cn("relative flex-1 rounded-lg", busy && "agent-glow")}>
+          <textarea
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" && !e.shiftKey) {
+                e.preventDefault();
+                submit();
+              }
+            }}
+            rows={1}
+            placeholder="Ask Claude to run something in the sandbox…"
+            className="relative z-10 max-h-40 min-h-10 w-full resize-none rounded-lg border bg-background px-3 py-2 text-sm outline-none focus-visible:ring-2 focus-visible:ring-ring/40"
+          />
+        </div>
         <Button type="submit" size="icon" disabled={busy || !input.trim()}>
           {busy ? <Spinner className="size-4" /> : <SendHorizonal className="size-4" />}
           <span className="sr-only">Send</span>
