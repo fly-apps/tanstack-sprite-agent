@@ -30,30 +30,49 @@ When the model needs to run something, `chat()`'s agent loop calls `run_bash`; t
 
 ## Quick start
 
+**Prerequisites:** Node.js **≥ 22** and [pnpm](https://pnpm.io) (`npm i -g pnpm`), plus two credentials:
+
+| Credential          | Where to get it                                                                       |
+| ------------------- | ------------------------------------------------------------------------------------- |
+| `ANTHROPIC_API_KEY` | [console.anthropic.com](https://console.anthropic.com/settings/keys) — the chat model |
+| `SPRITES_API_KEY`   | [sprites.dev](https://sprites.dev) — the sandbox (`org/projectNumber/tokenId/secret`) |
+
+**1. Clone & install**
+
 ```sh
 git clone https://github.com/fly-apps/tanstack-sprite-agent
 cd tanstack-sprite-agent
 pnpm install
-
-cp .env.example .env   # then fill in ANTHROPIC_API_KEY and SPRITES_API_KEY
-set -a && . ./.env && set +a
-
-pnpm serve             # vite build → node server.mjs, on http://localhost:8080
 ```
 
-You need an **Anthropic API key** and a **[Sprites](https://sprites.dev) API token**. Then open http://localhost:8080 and try:
+**2. Add your keys** — copy the template and fill it in:
+
+```sh
+cp .env.example .env
+# then edit .env and set ANTHROPIC_API_KEY and SPRITES_API_KEY
+```
+
+**3. Run** — builds the UI, then serves it + the API on port 8080:
+
+```sh
+pnpm serve
+```
+
+`.env` is loaded automatically (`node --env-file-if-exists=.env`). Open **http://localhost:8080** and try:
 
 - "What OS, kernel, and node version is this sandbox?"
 - "Write fib.py that prints the first 10 Fibonacci numbers, then run it."
 - "Create a git repo, add a README, and show me the log."
 
+> The first request provisions a fresh Sprite and can take ~1–3 min; after that it's fast.
+
 ### Development
 
-Run the API and the Vite dev server side by side (Vite proxies `/api` → `:8081`):
+Run the API and the Vite dev server side by side (the Vite dev server proxies `/api` → `:8081`, giving you UI hot-reload):
 
 ```sh
-PORT=8081 node server.mjs   # API
-pnpm dev                    # UI with hot reload
+PORT=8081 pnpm start   # API on :8081 (loads .env)
+pnpm dev               # Vite UI with hot reload
 ```
 
 ## How it fits together
