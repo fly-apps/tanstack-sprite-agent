@@ -1,4 +1,21 @@
-# tanstack-sprite-agent
+<p align="center">
+  <img src="https://raw.githubusercontent.com/fly-apps/tanstack-sprite-agent/main/public/logo.webp" alt="tanstack-sprite-agent" width="132" height="132" />
+</p>
+
+<h1 align="center">tanstack-sprite-agent</h1>
+
+<p align="center">
+  <b>Claude with a real Linux sandbox</b> — a <a href="https://sprites.dev">Sprite</a> (Fly.io) — in one <code>chat()</code> call.
+</p>
+
+<p align="center">
+  <a href="./LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="MIT License" /></a>
+  <img src="https://img.shields.io/badge/TanStack-AI-ff4154?logo=react&logoColor=white" alt="TanStack AI" />
+  <img src="https://img.shields.io/badge/sandbox-Sprites-7c3aed" alt="Sprites" />
+  <img src="https://img.shields.io/badge/node-%E2%89%A522-339933?logo=nodedotjs&logoColor=white" alt="Node >= 22" />
+</p>
+
+---
 
 A chat app that gives Claude a **real Linux sandbox** — a [Sprite](https://sprites.dev) (Fly.io) — through a single `run_bash` tool. Ask it to inspect the machine, write and run code, install packages, or drive a git repo, and it does the work inside an isolated, disposable Sprite and streams the results back.
 
