@@ -27,7 +27,6 @@ When the model needs to run something, `chat()`'s agent loop calls `run_bash`; t
 
 <img width="814" height="727" alt="Screenshot 2026-07-01 at 13 06 00" src="https://github.com/user-attachments/assets/da794002-fa12-49b3-b617-dafac4ab5dc0" />
 
-
 ## Quick start
 
 **Prerequisites:** Node.js **≥ 22** and [pnpm](https://pnpm.io) (`npm i -g pnpm`), plus two credentials:
@@ -88,6 +87,7 @@ The browser POSTs the conversation to `/api/chat`; the server runs `chat()` with
 
 ## Notes
 
+- **Model.** Defaults to `claude-sonnet-5`; set `ANTHROPIC_MODEL` to any Anthropic model id (e.g. `claude-opus-4-8`).
 - **One shared sandbox.** The demo creates a single Sprite on first tool use and reuses it. A production app would key a sandbox per session (see `@tanstack/ai-sandbox`'s `defineSandbox` / `withSandbox`) and tear it down when done.
 - **The Anthropic key stays on the server** — nothing sensitive is written into the Sprite; the Sprite only ever runs the commands the model requests.
 - **Cold start.** The first `run_bash` in a fresh Sprite waits for it to provision (~1–3 min); after that calls are fast, and an idle Sprite resumes on the next exec.

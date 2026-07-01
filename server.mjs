@@ -13,6 +13,7 @@
  *
  * Env:
  *   ANTHROPIC_API_KEY  - Claude API key (the chat model)
+ *   ANTHROPIC_MODEL    - Claude model id (default claude-sonnet-5)
  *   SPRITES_API_KEY    - Sprites API token (org/projectNumber/tokenId/secret)
  *   PORT               - listen port (default 8080)
  */
@@ -28,6 +29,9 @@ import { SpritesClient } from "@tanstack/ai-sandbox-sprites";
 
 const PORT = Number(process.env.PORT ?? 8080);
 const HERE = dirname(fileURLToPath(import.meta.url));
+
+// The Claude model. Override with ANTHROPIC_MODEL (any Anthropic model id).
+const MODEL = process.env.ANTHROPIC_MODEL ?? "claude-sonnet-5";
 
 for (const key of ["ANTHROPIC_API_KEY", "SPRITES_API_KEY"]) {
   if (!process.env[key]) throw new Error(`Missing ${key} in the environment`);
@@ -113,7 +117,7 @@ async function handleChat(req, res) {
   req.on("close", () => abortController.abort());
 
   const stream = chat({
-    adapter: anthropicText("claude-sonnet-4-6"),
+    adapter: anthropicText(MODEL),
     tools: [runBash],
     systemPrompts: [SYSTEM_PROMPT],
     agentLoopStrategy: maxIterations(20),
@@ -189,5 +193,5 @@ const server = http.createServer(async (req, res) => {
 });
 
 server.listen(PORT, () => {
-  console.log(`sandbox-sprites-chat listening on http://0.0.0.0:${PORT}`);
+  console.log(`sandbox-sprites-chat listening on http://0.0.0.0:${PORT} (model: ${MODEL})`);
 });
