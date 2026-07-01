@@ -17,6 +17,8 @@ import {
   MessageScrollerItem,
   MessageScrollerProvider,
   MessageScrollerViewport,
+  useMessageScroller,
+  useMessageScrollerVisibility,
 } from "@/components/ui/message-scroller";
 import { useSandboxChat } from "@/lib/use-sandbox-chat";
 import type { ChatMessage, ToolStep } from "@/lib/use-sandbox-chat";
@@ -133,6 +135,45 @@ function EmptyState({ onPick }: { onPick: (text: string) => void }) {
   );
 }
 
+/**
+ * A breadcrumb of the conversation's turns (each user message is a scroll
+ * anchor). Uses the MessageScroller hooks: `useMessageScrollerVisibility` for
+ * the active turn and `useMessageScroller().scrollToMessage` to jump. Must be
+ * rendered inside `MessageScrollerProvider`.
+ */
+function NavTrail({ messages }: { messages: Array<ChatMessage> }) {
+  const { currentAnchorId } = useMessageScrollerVisibility();
+  const { scrollToMessage } = useMessageScroller();
+  const turns = messages.filter((m) => m.role === "user");
+  if (turns.length < 2) return null;
+  return (
+    <nav className="flex items-center gap-1.5 overflow-x-auto border-b px-4 py-2 text-xs">
+      <span className="shrink-0 font-medium text-muted-foreground">Turns</span>
+      {turns.map((m, i) => {
+        const active = m.id === currentAnchorId;
+        const label = m.text.replace(/\s+/g, " ").trim().slice(0, 28);
+        return (
+          <button
+            key={m.id}
+            type="button"
+            title={m.text}
+            onClick={() => scrollToMessage(m.id, { align: "start" })}
+            className={cn(
+              "shrink-0 rounded-full px-2.5 py-0.5 transition-colors",
+              active
+                ? "bg-primary text-primary-foreground"
+                : "text-muted-foreground hover:bg-muted hover:text-foreground",
+            )}
+          >
+            {i + 1}. {label}
+            {m.text.trim().length > 28 ? "…" : ""}
+          </button>
+        );
+      })}
+    </nav>
+  );
+}
+
 export default function App() {
   const { messages, busy, send } = useSandboxChat();
   const [input, setInput] = useState("");
@@ -166,6 +207,7 @@ export default function App() {
       </header>
 
       <MessageScrollerProvider autoScroll>
+        <NavTrail messages={messages} />
         <MessageScroller className="flex-1">
           <MessageScrollerViewport className="px-5 py-6">
             <MessageScrollerContent>
