@@ -137,11 +137,12 @@
     #34d399,
     #6bdaff
   );
-  animation: agent-glow-spin 3s linear infinite;
+  animation: agent-glow-spin 6s linear infinite;
 }
 .agent-glow::before {
   z-index: 20;
-  padding: 1.5px;
+  padding: 1px;
+  opacity: 0.75;
   -webkit-mask:
     linear-gradient(#000 0 0) content-box,
     linear-gradient(#000 0 0);
@@ -150,9 +151,9 @@
 }
 .agent-glow::after {
   z-index: 0;
-  inset: -4px;
-  filter: blur(14px);
-  opacity: 0.6;
+  inset: -1px;
+  filter: blur(6px);
+  opacity: 0.18;
 }
 @media (prefers-reduced-motion: reduce) {
   .agent-glow::before,

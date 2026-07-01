@@ -257,7 +257,12 @@ export default function App() {
             className="relative z-10 max-h-40 min-h-10 w-full resize-none rounded-lg border bg-background px-3 py-2 text-sm outline-none focus-visible:ring-2 focus-visible:ring-ring/40"
           />
         </div>
-        <Button type="submit" size="icon" disabled={busy || !input.trim()}>
+        <Button
+          type="submit"
+          size="icon"
+          disabled={busy || !input.trim()}
+          className="size-10 shrink-0"
+        >
           {busy ? <Spinner className="size-4" /> : <SendHorizonal className="size-4" />}
           <span className="sr-only">Send</span>
         </Button>

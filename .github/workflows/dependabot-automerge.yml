@@ -1,0 +1,30 @@
+name: Dependabot auto-merge
+
+# Auto-approve and enable auto-merge for Dependabot PRs that are "safe"
+# (patch and minor updates). Major bumps are left for manual review.
+# Requires "Allow auto-merge" enabled in the repo settings; with branch
+# protection, the merge waits for required checks to pass.
+
+on: pull_request_target
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  automerge:
+    if: github.actor == 'dependabot[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fetch Dependabot metadata
+        id: meta
+        uses: dependabot/fetch-metadata@v2
+
+      - name: Approve and enable auto-merge (non-major only)
+        if: steps.meta.outputs.update-type != 'version-update:semver-major'
+        run: |
+          gh pr review --approve "$PR_URL"
+          gh pr merge --auto --squash "$PR_URL"
+        env:
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
