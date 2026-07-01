@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/fly-apps/tanstack-sprite-agent/main/public/logo.webp" alt="tanstack-sprite-agent" width="132" height="132" />
+  <img src="https://github.com/user-attachments/assets/b984e0e2-72ec-4819-a408-74052495f333" alt="tanstack-sprite-agent" width="132" height="132" />
 </p>
 
 <h1 align="center">tanstack-sprite-agent</h1>
