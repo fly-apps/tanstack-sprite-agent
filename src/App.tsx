@@ -4,6 +4,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Bubble, BubbleContent } from "@/components/ui/bubble";
 import { Button } from "@/components/ui/button";
 import { Marker, MarkerContent, MarkerIcon } from "@/components/ui/marker";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Message, MessageAvatar, MessageContent } from "@/components/ui/message";
 import { Spinner } from "@/components/ui/spinner";
 import { Markdown } from "@/components/markdown";
@@ -29,6 +30,35 @@ const SUGGESTIONS = [
   "Create a git repo, add a README, and show me the log.",
 ];
 
+/** Truncated command; long ones reveal the full text in a popover on hover. */
+function CommandLabel({ command, running }: { command: string; running: boolean }) {
+  const [open, setOpen] = useState(false);
+  const base = cn("block w-full truncate text-left", running && "shimmer");
+  if (command.length <= 60) return <span className={base}>{command}</span>;
+  return (
+    <Popover open={open} onOpenChange={setOpen}>
+      <PopoverTrigger
+        className={cn(base, "cursor-default")}
+        onMouseEnter={() => setOpen(true)}
+        onMouseLeave={() => setOpen(false)}
+      >
+        {command}
+      </PopoverTrigger>
+      <PopoverContent
+        align="start"
+        onOpenAutoFocus={(e) => e.preventDefault()}
+        onMouseEnter={() => setOpen(true)}
+        onMouseLeave={() => setOpen(false)}
+        className="w-[min(90vw,42rem)] p-0"
+      >
+        <pre className="max-h-72 overflow-auto rounded-md p-3 font-mono text-xs leading-relaxed break-words whitespace-pre-wrap">
+          {command}
+        </pre>
+      </PopoverContent>
+    </Popover>
+  );
+}
+
 function ToolStepView({ tool }: { tool: ToolStep }) {
   const output = [
     (tool.stdout ?? "").trimEnd(),
@@ -46,8 +76,8 @@ function ToolStepView({ tool }: { tool: ToolStep }) {
             <Terminal className="size-3.5" />
           )}
         </MarkerIcon>
-        <MarkerContent className={cn("font-mono", tool.status === "running" && "shimmer")}>
-          {tool.command || "run_bash"}
+        <MarkerContent className="min-w-0 font-mono">
+          <CommandLabel command={tool.command || "run_bash"} running={tool.status === "running"} />
         </MarkerContent>
       </Marker>
       {tool.status !== "running" && (
@@ -254,7 +284,7 @@ export default function App() {
             }}
             rows={1}
             placeholder="Ask Claude to run something in the sandbox…"
-            className="relative z-10 max-h-40 min-h-10 w-full resize-none rounded-lg border bg-background px-3 py-2 text-sm outline-none focus-visible:ring-2 focus-visible:ring-ring/40"
+            className="relative z-10 block max-h-40 min-h-10 w-full resize-none rounded-lg border bg-background px-3 py-2 text-sm outline-none focus-visible:ring-2 focus-visible:ring-ring/40"
           />
         </div>
         <Button
