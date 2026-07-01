@@ -25,6 +25,9 @@ A chat app that gives Claude a **real Linux sandbox** — a [Sprite](https://spr
 
 When the model needs to run something, `chat()`'s agent loop calls `run_bash`; the tool execs the command in a Sprite (created lazily on first use and reused) and the model reads the real output.
 
+<img width="814" height="727" alt="Screenshot 2026-07-01 at 13 06 00" src="https://github.com/user-attachments/assets/da794002-fa12-49b3-b617-dafac4ab5dc0" />
+
+
 ## Quick start
 
 ```sh
