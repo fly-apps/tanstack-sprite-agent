@@ -16,13 +16,13 @@ importers:
         version: 0.39.0
       '@tanstack/ai-anthropic':
         specifier: ^0.15.13
-        version: 0.15.13(@tanstack/ai@0.39.0)(zod@4.4.3)
+        version: 0.15.13(@tanstack/ai@0.39.0)(zod@4.5.4)
       '@tanstack/ai-sandbox':
         specifier: ^0.2.0
-        version: 0.2.0(@tanstack/ai@0.39.0)(zod@4.4.3)
+        version: 0.2.0(@tanstack/ai@0.39.0)(zod@4.5.4)
       '@tanstack/ai-sandbox-sprites':
         specifier: ^0.2.0
-        version: 0.2.0(@tanstack/ai-sandbox@0.2.0(@tanstack/ai@0.39.0)(zod@4.4.3))
+        version: 0.2.0(@tanstack/ai-sandbox@0.2.0(@tanstack/ai@0.39.0)(zod@4.5.4))
       class-variance-authority:
         specifier: ^0.7.1
         version: 0.7.1
@@ -51,8 +51,8 @@ importers:
         specifier: ^3.0.1
         version: 3.6.0
       zod:
-        specifier: ^4.2.0
-        version: 4.4.3
+        specifier: ^4.5.4
+        version: 4.5.4
     devDependencies:
       '@tailwindcss/typography':
         specifier: ^0.5.20
@@ -2445,8 +2445,8 @@ packages:
   zod@3.25.76:
     resolution: {integrity: sha512-gzUt/qt81nXsFGKIFcC3YnfEAx5NkunCfnDlvuBSSFS02bcXu4Lmea0AFIUwbLWxWPx3d9p8S5QoaujKcNQxcQ==}
 
-  zod@4.4.3:
-    resolution: {integrity: sha512-ytENFjIJFl2UwYglde2jchW2Hwm4GJFLDiSXWdTrJQBIN9Fcyp7n4DhxJEiWNAJMV1/BqWfW/kkg71UDcHJyTQ==}
+  zod@4.5.4:
+    resolution: {integrity: sha512-sC95tT5iHHH9gtpj6A81kh+NEaRAUFN+qlUPDUbRfOMvNf5QCBqsb3WgvnpVtK5Y+4UfA6KqufotuTvMGiTlsA==}
 
   zwitch@2.0.4:
     resolution: {integrity: sha512-bXE4cR/kVZhKZX/RjPEflHaKVhUVl85noU3v6b8apfQEc1x4A+zBxjZ4lN8LqGd6WZ3dl98pY4o717VFmoPp+A==}
@@ -2457,12 +2457,12 @@ snapshots:
     dependencies:
       zod: 3.25.76
 
-  '@anthropic-ai/sdk@0.97.1(zod@4.4.3)':
+  '@anthropic-ai/sdk@0.97.1(zod@4.5.4)':
     dependencies:
       json-schema-to-ts: 3.1.1
       standardwebhooks: 1.0.0
     optionalDependencies:
-      zod: 4.4.3
+      zod: 4.5.4
 
   '@babel/code-frame@7.29.7':
     dependencies:
@@ -2696,7 +2696,7 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.5
 
-  '@modelcontextprotocol/sdk@1.29.0(zod@4.4.3)':
+  '@modelcontextprotocol/sdk@1.29.0(zod@4.5.4)':
     dependencies:
       '@hono/node-server': 1.19.14(hono@4.12.27)
       ajv: 8.20.0
@@ -2713,8 +2713,8 @@ snapshots:
       json-schema-typed: 8.0.2
       pkce-challenge: 5.0.1
       raw-body: 3.0.2
-      zod: 4.4.3
-      zod-to-json-schema: 3.25.2(zod@4.4.3)
+      zod: 4.5.4
+      zod-to-json-schema: 3.25.2(zod@4.5.4)
     transitivePeerDependencies:
       - supports-color
 
@@ -3621,24 +3621,24 @@ snapshots:
       tailwindcss: 4.3.2
       vite: 7.3.6(jiti@2.7.0)(lightningcss@1.32.0)
 
-  '@tanstack/ai-anthropic@0.15.13(@tanstack/ai@0.39.0)(zod@4.4.3)':
+  '@tanstack/ai-anthropic@0.15.13(@tanstack/ai@0.39.0)(zod@4.5.4)':
     dependencies:
-      '@anthropic-ai/sdk': 0.97.1(zod@4.4.3)
+      '@anthropic-ai/sdk': 0.97.1(zod@4.5.4)
       '@tanstack/ai': 0.39.0
       '@tanstack/ai-utils': 0.3.1
-      zod: 4.4.3
+      zod: 4.5.4
 
   '@tanstack/ai-event-client@0.6.8':
     dependencies:
       '@tanstack/devtools-event-client': 0.4.4
 
-  '@tanstack/ai-sandbox-sprites@0.2.0(@tanstack/ai-sandbox@0.2.0(@tanstack/ai@0.39.0)(zod@4.4.3))':
+  '@tanstack/ai-sandbox-sprites@0.2.0(@tanstack/ai-sandbox@0.2.0(@tanstack/ai@0.39.0)(zod@4.5.4))':
     dependencies:
-      '@tanstack/ai-sandbox': 0.2.0(@tanstack/ai@0.39.0)(zod@4.4.3)
+      '@tanstack/ai-sandbox': 0.2.0(@tanstack/ai@0.39.0)(zod@4.5.4)
 
-  '@tanstack/ai-sandbox@0.2.0(@tanstack/ai@0.39.0)(zod@4.4.3)':
+  '@tanstack/ai-sandbox@0.2.0(@tanstack/ai@0.39.0)(zod@4.5.4)':
     dependencies:
-      '@modelcontextprotocol/sdk': 1.29.0(zod@4.4.3)
+      '@modelcontextprotocol/sdk': 1.29.0(zod@4.5.4)
       '@tanstack/ai': 0.39.0
     transitivePeerDependencies:
       - '@cfworker/json-schema'
@@ -5009,12 +5009,12 @@ snapshots:
 
   yallist@3.1.1: {}
 
-  zod-to-json-schema@3.25.2(zod@4.4.3):
+  zod-to-json-schema@3.25.2(zod@4.5.4):
     dependencies:
-      zod: 4.4.3
+      zod: 4.5.4
 
   zod@3.25.76: {}
 
-  zod@4.4.3: {}
+  zod@4.5.4: {}
 
   zwitch@2.0.4: {}
